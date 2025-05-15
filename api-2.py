@@ -10,6 +10,10 @@ schedules = {}
 sqs = boto3.client('sqs', region_name='us-east-1')
 QUEUE_URL = "https://sqs.us-east-1.amazonaws.com/276784368250/my-api-queue"
 
+class Exito(Resource):
+    def get(self):
+        return {'message': 'conectado a la API'}
+        
 class Schedules(Resource):
     def get(self):
         return schedules
@@ -30,6 +34,7 @@ class Schedules(Resource):
         )
         return {new_id: schedule}, 201
 
+api.add_resource(Exito, '/')
 api.add_resource(Schedules, '/schedules')
 
 if __name__ == '__main__':
